@@ -1,5 +1,5 @@
 .pypirc
 *.pyc
 .sync/*
-Flask_SAPB1.egg-info/*
+Flask_Mage2Connector.egg-info/*
 dist/*
