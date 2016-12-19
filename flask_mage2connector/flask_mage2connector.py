@@ -35,7 +35,8 @@ class Mage2Connector(object):
         if app is not None:
             self.init_app(app)
 
-    def init_app(self, app):
+    def init_app(self, app, appId="Mage2"):
+        self.appId = appId
         # Use the newstyle teardown_appcontext if it's available,
         # otherwise fall back to the request context
         if hasattr(app, 'teardown_appcontext'):
@@ -46,10 +47,10 @@ class Mage2Connector(object):
     def connect(self):
         """Initiate the connect with MySQL server.
         """
-        mySQLConn = MySQLdb.connect(current_app.config['MAGE2DBSERVER'],
-                                    current_app.config['MAGE2DBUSERNAME'],
-                                    current_app.config['MAGE2DBPASSWORD'],
-                                    current_app.config['MAGE2DB'],
+        mySQLConn = MySQLdb.connect(current_app.config[self.appId]['MAGE2DBSERVER'],
+                                    current_app.config[self.appId]['MAGE2DBUSERNAME'],
+                                    current_app.config[self.appId]['MAGE2DBPASSWORD'],
+                                    current_app.config[self.appId]['MAGE2DB'],
                                     charset="utf8",
                                     use_unicode=False)
         log = "Open Mage2 DB connection"
